@@ -19,11 +19,11 @@ pip install -r requirements.txt
 
 ## Usage
 
-1) Define the two env variables 
+1) Define the two env variables in the file `.env.sample`
     - GOOGLE_API_KEY: to connect to the Youtube API
     - TORAH_PODCAST_GITHUB_TOKEN: to be able to modify the `thetorahpodcast` repo
 
-2) rename .env.sample by .env
+2) rename `.env.sample` by `.env`
 
 3) Edit the youtube `CHANNEL_ID` from which you want to get the latest videos ids (last 12 hours) and upload them
 
