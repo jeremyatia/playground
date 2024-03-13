@@ -78,7 +78,7 @@ class UploadIDstoRepo:
             self._create_history_file(repo)
         for id in tqdm(ids_to_upload):
             if self._check_if_already_uploaded(repo, id):
-                print(f"{id} is already uploaded according to the episode_history.json")
+                print(f"\n{id} is already uploaded according to the episode_history.json")
                 continue
             else:
                 # update id to episode file
@@ -92,7 +92,7 @@ class UploadIDstoRepo:
                 ch_decoded_content.append(id)
                 repo.update_file(path=content_history.path, message=f"upload {id} in {self.episode_history_filename}", content=str(ch_decoded_content),
                                   sha=content_history.sha, branch="main")
-                print(f'Will upload the next id in {sleep_between_uploads_in_minutes} minutes.')
+                print(f'\nWill upload the next id in {sleep_between_uploads_in_minutes} minutes.')
                 sleep(sleep_between_uploads_in_minutes*60)
 
 
