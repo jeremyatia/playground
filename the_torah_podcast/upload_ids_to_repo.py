@@ -30,15 +30,15 @@ class UploadIDstoRepo:
         else:
             raise MissingEnvironmentVariable("TORAH_PODCAST_GITHUB_TOKEN does not exist")
         
-    def _check_if_history_file_exists(self, repo):
+    def _check_if_file_exists(self, repo, filename):
         try:
-            repo.get_contents(self.episode_history_filename)
+            repo.get_contents(filename)
         except GithubException:
             return False
         return True
 
-    def _create_history_file(self, repo):
-        repo.create_file(self.episode_history_filename, f"create {self.episode_history_filename} file", "[]", branch="main")
+    def _create_file(self, repo, filename):
+        repo.create_file(filename, f"create {filename} file", "[]", branch="main")
         
     def _get_latest_video_ids_from_youtube_channel(self) -> list:
         # Build the YouTube Data API client
@@ -74,8 +74,14 @@ class UploadIDstoRepo:
         g = Github(self.github_token)
         repo = g.get_repo("thetorahpodcast/youtube-to-anchorfm")
         ids_to_upload = self._get_latest_video_ids_from_youtube_channel()
-        if not self._check_if_history_file_exists(repo):
-            self._create_history_file(repo)
+        print(f'These ids are fetched\n {ids_to_upload}')
+        if not self._check_if_file_exists(repo, filename=self.episode_filename):
+            print(f'The file {self.episode_filename} does not exist.')
+            print(f'Creating it...')
+            self._create_file(repo, self.episode_filename)
+            print(f'{self.episode_filename} created.')
+            self._create_file(repo, self.episode_history_filename)
+            print(f'{self.episode_history_filename} created.')
         for id in tqdm(ids_to_upload):
             if self._check_if_already_uploaded(repo, id):
                 print(f"\n{id} is already uploaded according to the episode_history.json")
