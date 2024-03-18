@@ -1,0 +1,10 @@
+version: "3"
+services:
+  torahpodcast:
+    build: .
+    ports:
+      - "8080:8080"
+    working_dir: /code
+    container_name: torahpodcast
+    image: torahpodcast_image
+    command: "python main.py"

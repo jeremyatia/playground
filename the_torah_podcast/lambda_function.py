@@ -1,14 +1,19 @@
 import json
 from upload_ids_to_repo import main
 
+import sys
 
-def lambda_handler(event, context):
+
+def handler(event, context):
     # TODO implement
     main()
     return {
         'statusCode': 200,
         'body': json.dumps('Hello from Lambda!')
     }
+
+
+
 
 #
 # def lambda_handler(event, context):
