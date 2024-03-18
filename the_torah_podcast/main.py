@@ -1,13 +1,11 @@
 import os
-import sys
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from the_torah_podcast.upload_ids_to_repo import UploadIDstoRepo
-from the_torah_podcast import path_to_file
+from upload_ids_to_repo import UploadIDstoRepo
+from config import path_to_file
 import pandas as pd
 
 
-def main():
+def run():
     subscribers = pd.read_csv(os.path.join(path_to_file, 'subscribers.csv'))
     for i in range(subscribers.shape[0]):
         channel_id, frequency_to_check, episode_name = subscribers.iloc[i]
@@ -18,4 +16,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run()

@@ -1,18 +1,13 @@
 import json
-from upload_ids_to_repo import main
-
-import sys
+from main import run
 
 
 def handler(event, context):
-    # TODO implement
-    main()
+    run()
     return {
         'statusCode': 200,
         'body': json.dumps('Hello from Lambda!')
     }
-
-
 
 
 #
@@ -77,3 +72,6 @@ def handler(event, context):
 #
 #         print(body)
 #     return model_answer(body)
+
+
+handler(None, None)

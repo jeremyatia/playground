@@ -17,6 +17,7 @@ pip install -r requirements.txt
 ```
 
 
+
 ## Usage
 
 1) Define the two env variables in the file `.env.sample`
@@ -46,6 +47,15 @@ YZ_BVtMyNzA is already uploaded according to the episode_history.json
 IYbRu_TdBGE is already uploaded according to the episode_history.json
 ```
 
+
+
+# AWS
+
+To set up AWS
+
+- install the aws cli 
+- run `aws configure` 
+- Fill AWS Access Key ID and secret Key
 ## License
 Enjoy tsadik
 
