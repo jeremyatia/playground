@@ -70,7 +70,7 @@ class UploadIDstoRepo:
         content_list = eval(content_str)
         return True if id in content_list else False
 
-    def execute(self, sleep_between_uploads_in_minutes:int=5):
+    def execute(self, sleep_between_uploads_in_minutes:int=3):
         g = Github(self.github_token)
         repo = g.get_repo("thetorahpodcast/youtube-to-anchorfm")
         ids_to_upload = self._get_latest_video_ids_from_youtube_channel()
@@ -84,14 +84,14 @@ class UploadIDstoRepo:
             print(f'{self.episode_history_filename} created.')
         for id in tqdm(ids_to_upload):
             if self._check_if_already_uploaded(repo, id):
-                print(f"\n{id} is already uploaded according to the episode_history.json")
+                print(f"\n{id} is already uploaded according to the {self.episode_history_filename}")
                 continue
             else:
                 # update id to episode file
                 content_episode = repo.get_contents(self.episode_filename, ref="main")
                 repo.update_file(path=content_episode.path, message=f"upload {id} in {self.episode_filename}", content='{"id": "' + id + '"}',
                                   sha=content_episode.sha, branch="main")
-
+                print(f'{id} updated')
                 # append id to history file
                 content_history = repo.get_contents(self.episode_history_filename, ref="main")
                 ch_decoded_content = eval(content_history.decoded_content)
