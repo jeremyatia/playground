@@ -56,6 +56,13 @@ To set up AWS
 - install the aws cli 
 - run `aws configure` 
 - Fill AWS Access Key ID and secret Key
+
+# How to push the docker
+
+Just run `upload_to_aws.sh`
+
 ## License
 Enjoy tsadik
 
+
+docker tag torahpodcast-docker:latest 992382515700.dkr.ecr.eu-north-1.amazonaws.com/torahpodcast-docker:latest
